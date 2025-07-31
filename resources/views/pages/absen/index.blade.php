@@ -132,7 +132,7 @@
                         <td>{{ $detail->asal_instansi }}</td> 
                         <td>
                            @if ($detail->tanda_tangan)
-                            <img src="{{ asset('storage/app/public/' . $detail->tanda_tangan) }}" alt="TTD" width="100">
+                            <img src="{{ asset('storage/' . $detail->tanda_tangan) }}" width="100">
                            @else
                             Tidak ada
                            @endif

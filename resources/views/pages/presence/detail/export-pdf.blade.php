@@ -17,7 +17,8 @@
             border-collapse: collapse;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #000;
             padding: 6px;
         }
@@ -59,41 +60,40 @@
             </tr>
         </thead>
         <tbody>
-@forelse ($presenceDetails as $detail)
-    <tr>
-        <td>{{ $loop->iteration }}</td>
-        <td>{{ $detail->nama }}</td>
-        <td>{{ $detail->jabatan }}</td>
-        <td>{{ $detail->asal_instansi }}</td>
-        <td>
-@if ($detail->tanda_tangan)
-    @php
-        $path = storage_path('app/public/tanda-tangan/' . $detail->tanda_tangan);
-    @endphp
+            @forelse ($presenceDetails as $detail)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $detail->nama }}</td>
+                    <td>{{ $detail->jabatan }}</td>
+                    <td>{{ $detail->asal_instansi }}</td>
+                    <td>
+                        @if ($detail->tanda_tangan)
+                            @php
+                                $path = storage_path('app/public/' . $detail->tanda_tangan);
+                            @endphp
 
-    @if (file_exists($path))
-        @php
-            $type = pathinfo($path, PATHINFO_EXTENSION);
-            $data = file_get_contents($path);
-            $img = 'data:image/' . $type . ';base64,' . base64_encode($data);
-        @endphp
-        <img src="{{ $img }}" style="max-height: 50px; display:block; margin:auto;">
-        <small style="color:blue">{{ $detail->tanda_tangan }}</small>
-    @else
-        <span style="color:red;">File tidak ditemukan</span>
-    @endif
-@else
-    <span style="color:red;">Belum ada tanda tangan</span>
-@endif
-</td>
+                            @if (file_exists($path))
+                                @php
+                                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                                    $data = file_get_contents($path);
+                                    $img = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                                @endphp
+                                <img src="{{ $img }}" style="max-height: 50px; display:block; margin:auto;">
+                            @else
+                                <span style="color:red;">File tidak ditemukan</span>
+                            @endif
+                        @else
+                            <span style="color:red;">Belum ada tanda tangan</span>
+                        @endif
+                    </td>
 
-    </tr>
-@empty
-    <tr>
-        <td colspan="5" class="text-center">Tidak ada data</td>
-    </tr>
-@endforelse
-</tbody>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5" class="text-center">Tidak ada data</td>
+                </tr>
+            @endforelse
+        </tbody>
 
     </table>
 
