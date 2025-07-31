@@ -63,7 +63,7 @@
     <td>{{ $detail->asal_instansi }}</td>
     <td>
     @if ($detail->tanda_tangan)
-    <img src="{{ asset('storage/tanda-tangan/' . $detail->tanda_tangan) }}" alt="Tanda Tangan" style="max-height: 50px;">
+    <img src="{{ asset('storage/' . $detail->tanda_tangan) }}" alt="Tanda Tangan" style="max-height: 50px;">
 @else
     <span style="color:red;">Tidak ada tanda tangan</span>
 @endif
